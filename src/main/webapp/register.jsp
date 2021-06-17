@@ -27,7 +27,7 @@
 					</div>
 					
 					<div class = "container bg-danger" id = "error" style="display:none" >
-						<span class = "font-weight-bold"> Failed registered.. Try again</span>
+						<span id = "error-message" class = "font-weight-bold"> Failed registered.. Try again</span>
 					</div>
 					<div class="card-body">
 						<form id = "reg-form" action="RegisterServlet" method = "POST">
@@ -101,7 +101,7 @@
 				success : function(data, textStatus, jqXHR){
 					console.log("success ......." + data);
 					if(data.trim() === "fail"){
-						$("#error-message").show();
+						$("#error").show();
 						$("#error-message").text("Please check term and condition : ");
 					}else{
 						swal("Register successfully..We are going to redirect to Login page")

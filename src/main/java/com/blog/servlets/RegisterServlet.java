@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		String check  = req.getParameter("check");
 		if(check == null) {
-
+			System.out.println(check + "yes, i am null");
 			out.println("fail");
 			//out.println("Please check term and condition : ");
 		}else {
