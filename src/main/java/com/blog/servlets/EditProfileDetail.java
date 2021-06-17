@@ -1,6 +1,8 @@
 package com.blog.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +35,8 @@ public class EditProfileDetail extends HttpServlet {
 
 	protected void process(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+		res.setContentType("text/html");
+		PrintWriter out = res.getWriter();
 		
 		HttpSession session = req.getSession();
 		User user =(User) session.getAttribute("user");
@@ -46,9 +50,13 @@ public class EditProfileDetail extends HttpServlet {
 		UserDao ud = new UserDao(ConnectionProvider.getConnection());
 		boolean complete = ud.updateUser(id, name, email, pass, gender);
 		
+		System.out.println(name + " " + email + " " + pass + " " + gender);
+		
 		if(complete) {
-			res.sendRedirect("profile.jsp");
+			out.println("success");
+			//res.sendRedirect("profile.jsp");
 		}else {
+			out.println("fail");
 			System.out.println("error encounter");
 		}
 		

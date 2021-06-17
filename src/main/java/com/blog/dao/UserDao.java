@@ -72,7 +72,7 @@ public class UserDao {
 	public boolean updateUser(int id , String name, String email, String pass, String gender) {
 		boolean flag = false;
 		try {
-			String q = "update user set name = ? email = ? password = ? gender = ? where id = ?";
+			String q = "update user set name = ?, email = ?, password = ?, gender = ? where id = ?";
 			PreparedStatement ps = con.prepareStatement(q);
 			
 			ps.setString(1,name);
@@ -80,7 +80,7 @@ public class UserDao {
 			ps.setString(3, pass);
 			ps.setString(4, gender);
 			ps.setInt(5, id);
-			
+		
 			ps.executeUpdate();
 			 flag = true;
 			

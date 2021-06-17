@@ -63,8 +63,10 @@ if (user == null) {
 					src="https://source.unsplash.com/user/erondu/1600x900"
 					alt="Card image cap">
 				<div class="card-body">
-
-					<form action = "EditProfileDetail" method = "POST">
+					<div id = "error" class = "container" style ="display:none">
+						<span id ="error-message" class = "bg-danger"></span>
+					</div>
+					<form id = "edit-form" action = "EditProfileDetail" method = "POST">
 						<table>
 
 							<tr>
@@ -124,7 +126,7 @@ if (user == null) {
 		crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 
@@ -132,6 +134,42 @@ if (user == null) {
 
 				$("#editUnable").hide();
 				$("#editEnable").show();
+			});
+			
+			
+			
+			$("#edit-form").on("submit", function(event){
+				
+				event.preventDefault();
+				let form = new FormData(this);
+				
+				$.ajax({
+					
+					url : "EditProfileDetail",
+					type : "POST",
+					data : form,
+					
+					success : function(data, textStatus, jqXHR){
+						if(data.trim() === "success"){
+							swal("Edit successfully..We are going to redirect to Profile page")
+		                     .then((value) => {
+		                         window.location = "profile.jsp"
+		                     });
+						}else{
+							$("#error").show();
+							$("#error-message").text("Please fill the details again");
+						}
+					},
+					
+					error : function(jqXHR, textStatus, errorThrown){
+						
+					},
+					
+					processData : false,
+					contentType : false
+						
+				});
+				
 			});
 
 		});
