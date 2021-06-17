@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", user);
 			out.print("great");
-			res.sendRedirect("profile.jsp");
+			//res.sendRedirect("profile.jsp");
 		}
 		System.out.println(req.getParameter("user_remember") + " " + email + " " + pass);
 	}
