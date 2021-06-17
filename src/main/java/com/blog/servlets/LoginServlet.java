@@ -50,16 +50,14 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		if(user == null) {
-			out.print("fail");
-			
-			
+			out.println("fail");
 		}else {
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("user", user);
-			out.print("great");
+			out.println("great");
 			//res.sendRedirect("profile.jsp");
 		}
-		System.out.println(req.getParameter("user_remember") + " " + email + " " + pass);
+		//System.out.println(req.getParameter("user_remember") + " " + email + " " + pass);
 	}
 }

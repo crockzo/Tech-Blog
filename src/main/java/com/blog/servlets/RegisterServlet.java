@@ -45,7 +45,9 @@ public class RegisterServlet extends HttpServlet {
 		
 		String check  = req.getParameter("check");
 		if(check == null) {
-			out.println("Please check term and condition : ");
+
+			out.println("fail");
+			//out.println("Please check term and condition : ");
 		}else {
 			String name = req.getParameter("user_name");
 			String email = req.getParameter("user_email");
@@ -58,6 +60,8 @@ public class RegisterServlet extends HttpServlet {
 			UserDao ud = new UserDao(ConnectionProvider.getConnection());
 			if(ud.saveUser(user)) {
 				out.println("done");
+			}else {
+				out.println("fail");
 			}
 		}
 	}

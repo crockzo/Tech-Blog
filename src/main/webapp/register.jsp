@@ -26,8 +26,8 @@
 						<p>Register Form :</p>
 					</div>
 					
-					<div class = "container bg-success" id = "success-message" style="display:none" >
-						<span class = "font-weight-bold"> successfully registered</span>
+					<div class = "container bg-danger" id = "error" style="display:none" >
+						<span class = "font-weight-bold"> Failed registered.. Try again</span>
 					</div>
 					<div class="card-body">
 						<form id = "reg-form" action="RegisterServlet" method = "POST">
@@ -82,7 +82,7 @@
 	
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-	
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	
@@ -100,7 +100,16 @@
 				data : form,
 				success : function(data, textStatus, jqXHR){
 					console.log("success ......." + data);
-					$("#success-message").show();
+					if(data.trim() === "fail"){
+						$("#error-message").show();
+						$("#error-message").text("Please check term and condition : ");
+					}else{
+						swal("Register successfully..We are going to redirect to Login page")
+	                     .then((value) => {
+	                         window.location = "login.jsp"
+	                     });
+					}
+					
 				},
 				error : function(jqXHR, textStatus, errorThrown){
 					console.log("fail to do request...." + jqXHR);

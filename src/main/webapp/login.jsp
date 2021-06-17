@@ -42,10 +42,10 @@ if(session.getAttribute("user") != null){
 						</div>
 						<div class="card-body">
 						
-						<div class = "container bg-danger" id = "error-message"  >
+						<div class = "container bg-danger" id = "error-message"  style = "display:none">
 							<span class = "font-weight-bold">Try again Password or email may be wrong</span>
 						</div>
-							<form action = "LoginServlet" method = "POST">
+							<form id="login-form" action = "LoginServlet" method = "POST">
 								<div class="mb-3">
 									<label for="exampleInputEmail1" class="form-label">Email
 										address</label> 
@@ -81,39 +81,41 @@ if(session.getAttribute("user") != null){
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
-		$("#submitLogin").click(function(event){
+		$("#login-form").on("submit", function(event){
 
 			
 			event.preventDefault();
 			let form = new FormData(this);
 
 			$.ajax({
-			
 			url : "LoginServlet",
 			type : "POST",
 			data : form,
 			
 			success : function(data, textStatus, jqXHR){
-				console.log("i am here success blick")
-				if(data.equals("fail")){
+				
+				//console.log("success ......." + data);
+				if(data.trim() === "fail"){
+
 					$("#error-message").show();
 				}else{
-					console.log(data);
+					 swal("Login successfully..We are going to redirect to Profile page")
+                     .then((value) => {
+                         window.location = "profile.jsp"
+                     });
 				}
+				
 			},
-			
 			error : function(jqXHR, textStatus, errorThrown){
-				console.log("i am here error blick")
+				console.log("fail to do request...." + jqXHR);
 			},
-			
 			processData : false,
 			contentType : false
-			
 			});
 		});
 	});
