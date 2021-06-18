@@ -4,7 +4,6 @@ package com.blog.dao;
 
 import java.sql.*;
 import com.blog.entities.*;
-import com.blog.helper.ConnectionProvider;
 public class UserDao {
 
 	private Connection con;

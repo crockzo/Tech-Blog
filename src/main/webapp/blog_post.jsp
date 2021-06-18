@@ -1,12 +1,17 @@
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
-    <%@ page import = "java.sql.*" %>
-    <%@ page import = "com.blog.entities.*" %>
-    <%@ page import = "com.blog.helper.*" %>
 
+
+<%@ page import= "com.blog.entities.*" %>
+<%@ page import = "com.blog.entities.*" %>
+<%@ page import = "com.blog.dao.*" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "com.blog.helper.*" %>
+    
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,8 +87,41 @@ if(session.getAttribute("user") != null){
 }
 %>
 
+<%
 
-<%@ include file = "allpost.jsp" %>
+	int pid = Integer.parseInt(request.getParameter("pid"));
+	
+	PostDao pd = new PostDao(ConnectionProvider.getConnection());
+	
+	Post p = pd.getPostByPid(pid);
+	
+	if(p == null){
+		return;
+	}
+	
+	
+		
+	
+	
+%>
+
+<div class = "container d-flex flex-row bd-highlight mb-3 ">
+	<div class="col">
+		<div class="row">
+			<div class="card" style="width: 18rem; margin: 12px">
+				<div class="card-body">
+					<h5 class="card-title"><%= p.getPtitle() %></h5>
+					<p class="card-text"><%= pd.getCategoryName(p.getCid()) %></p>
+					<p class="card-text"><%= p.getPcontent() %></p>
+					
+					 </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 </body>

@@ -1,18 +1,14 @@
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    <%@ page import = "java.sql.*" %>
+
     <%@ page import = "com.blog.entities.*" %>
-    <%@ page import = "com.blog.helper.*" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Tech Blog</title>
-
+<title>Insert title here</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -33,13 +29,11 @@
 		integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
 		crossorigin="anonymous"></script>
 
-<%
 
-if(session.getAttribute("user") != null){
-	
-	User user = (User) session.getAttribute("user");
-%>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+<!-- Nav bar start -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="index.jsp"><span
 				class="fa fa-coffee"> </span> Tech Blog</a>
@@ -55,36 +49,20 @@ if(session.getAttribute("user") != null){
 						aria-current="page" href="userPost.jsp">Post</a></li>
 					<li class="nav-item"><a class="nav-link active "
 						aria-current="page" href="createPost.jsp">Make new Post</a></li>
-					
+
 
 				</ul>
 			</div>
-			<a class="nav-link" href="editProfile.jsp" data-toggle="modal" data-target="#profile-modal"> <span class="fa fa-user-circle "></span> <%= user.getName().toUpperCase()%> </a>
-			<a class="nav-link bg-success font-weight-light text-white" href = "Logout">Logout</a>
+			<a class="nav-link" href="editProfile.jsp" data-toggle="modal"
+				data-target="#profile-modal"> <span class="fa fa-user-circle "></span>
+				<%= user.getName().toUpperCase()%>
+			</a> <a class="nav-link bg-success font-weight-light text-white"
+				href="Logout">Logout</a>
 		</div>
 	</nav>
 
-
-<%
-
-}else{
-	
+<!--  Nav bar end ohh yeahhhhhhh -->
 
 
-%>
-
-<%@ include file = "nav.jsp" %>
-
-
-
-<%
-
-}
-%>
-
-
-<%@ include file = "allpost.jsp" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
 </body>
 </html>

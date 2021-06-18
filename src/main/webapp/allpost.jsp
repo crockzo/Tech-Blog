@@ -6,17 +6,8 @@
     <%@ page import = "com.blog.dao.*" %>
     <%@ page import = "java.util.*" %>
     <%@ page import = "com.blog.helper.*" %>
-
-<%
-      User user = (User) session.getAttribute("user"); 
-		if(user == null){
-			response.sendRedirect("login.jsp");	
-		}
-System.out.print( " ------- " + user.getEmail() + " ------- ");
-
-%>
-
-
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,42 +33,11 @@ System.out.print( " ------- " + user.getEmail() + " ------- ");
 		integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
 		crossorigin="anonymous"></script>
 
-
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="index.jsp"><span
-				class="fa fa-coffee"> </span> Tech Blog</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active "
-						aria-current="page" href="userPost.jsp">Post</a></li>
-					<li class="nav-item"><a class="nav-link active "
-						aria-current="page" href="createPost.jsp">Make new Post</a></li>
-					
-
-				</ul>
-			</div>
-			<a class="nav-link" href="editProfile.jsp" data-toggle="modal" data-target="#profile-modal"> <span class="fa fa-user-circle "></span> <%= user.getName().toUpperCase()%> </a>
-			<a class="nav-link bg-success font-weight-light text-white" href = "Logout">Logout</a>
-		</div>
-	</nav>
-
-
-
-
-
-
-
-
-<!--  Show Post in the card -->
-
-
+    
+    
+    
+    
+    
 <%
 PostDao pd = new PostDao(ConnectionProvider.getConnection());
 	
@@ -94,7 +54,7 @@ PostDao pd = new PostDao(ConnectionProvider.getConnection());
 	
 %>
 
-
+<div class = "container ">
 	<div class="row">
 		<div class="col-md-4">
 			<div class="card" style="width: 18rem; margin: 12px">
@@ -107,7 +67,7 @@ PostDao pd = new PostDao(ConnectionProvider.getConnection());
 			</div>
 		</div>
 	</div>
-
+</div>
 <%
 
 }
@@ -115,14 +75,6 @@ PostDao pd = new PostDao(ConnectionProvider.getConnection());
 
 
 %>
-
-
-
-
-
-
-
-
 
 
 

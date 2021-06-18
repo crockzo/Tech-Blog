@@ -4,10 +4,12 @@
 
 
 <%
-User user = (User) session.getAttribute("user");
-if (user == null) {
-	response.sendRedirect("index.jsp");
+if (session.getAttribute("user") == null) {
+	response.sendRedirect("register.jsp");
+	return;
 }
+
+User user = (User) session.getAttribute("user");
 %>
 
 <!DOCTYPE html>
@@ -25,96 +27,114 @@ if (user == null) {
 </head>
 <body>
 
-	<%@ include file="nav.jsp"%>
 
 
-	<div class="container" id="">
-		<div id="editUnable">
-			<div class="card d-flex justify-content-center" style="width: 18rem;">
-				<img class="card-img-top"
-					src="https://source.unsplash.com/user/erondu/1600x900"
-					alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title"><%=user.getName().toUpperCase()%>
-					</h5>
-					<p class="card-text">Java developer : )</p>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item">Id : <%=user.getId()%>
-					</li>
-					<li class="list-group-item">Email : <%=user.getEmail().toUpperCase()%></li>
-					<li class="list-group-item">Gender : <%=user.getGender().toUpperCase()%></li>
-				</ul>
-				<div class="card-body">
-					<a href="profile.jsp" class="btn btn-primary ">Profile</a>
-
-				</div>
-			</div>
-
-		</div>
+<%@ include file = "AfterLoginNav.jsp" %>
 
 
 
 
 
-		<div id="editEnable" style="display: none">
-			<div class="card d-flex justify-content-center" style="width: 18rem;">
-				<img class="card-img-top"
-					src="https://source.unsplash.com/user/erondu/1600x900"
-					alt="Card image cap">
-				<div class="card-body">
-					<div id = "error" class = "container" style ="display:none">
-						<span id ="error-message" class = "bg-danger"></span>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 offset-md-4">
+				<div class="card" style="width: 18rem; margin: 12px">
+
+
+<!--  My profile Information : Edit unable -->
+
+						<div id="editUnable">
+							<div class="card d-flex justify-content-center"
+								style="width: 18rem;">
+								<img class="card-img-top"
+									src="pics/default.jpg"
+									alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title"><%=user.getName().toUpperCase()%>
+									</h5>
+									<p class="card-text">Java developer : )</p>
+								</div>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">Id : <%=user.getId()%>
+									</li>
+									<li class="list-group-item">Email : <%=user.getEmail().toUpperCase()%></li>
+									<li class="list-group-item">Gender : <%=user.getGender().toUpperCase()%></li>
+								</ul>
+								<div class="card-body">
+									<a href="profile.jsp" class="btn btn-primary ">Profile</a>
+								</div>
+							</div>
+						</div>
+						
+<!--  My profile Information  : END -->
+
+
+
+<!-- Edit section of the profile is Start here -->
+						<div id="editEnable" style="display: none">
+							<div class="card d-flex justify-content-center"
+								style="width: 18rem;">
+								<img class="card-img-top"
+									src="pics/default.jpg"
+									alt="Card image cap">
+								<div class="card-body">
+									<div id="error" class="container" style="display: none">
+										<span id="error-message" class="bg-danger"></span>
+									</div>
+									<form id="edit-form" action="EditProfileDetail" method="POST">
+										<table>
+
+											<tr>
+												<td>Id :</td>
+												<td><%=user.getId()%></td>
+											</tr>
+											<tr>
+												<td>Name :</td>
+												<td><input name="user_name" type="text"
+													placeholder="Enter your name."></td>
+											</tr>
+											<tr>
+												<td>Email :</td>
+												<td><input name="user_email" type="email"
+													placeholder="Enter your email"></td>
+											</tr>
+											<tr>
+												<td>Password :</td>
+												<td><input name="user_password" type="password"
+													placeholder="Enter your password."></td>
+											</tr>
+											<tr>
+												<td>Gender :</td>
+												<td><input name="user_gender" type="text"
+													placeholder="Enter your Gender."></td>
+											</tr>
+										</table>
+
+
+										<button type="submit" class="btn btn-primary">Update</button>
+									</form>
+
+								</div>
+
+								<div class="card-body">
+									<a href="profile.jsp" class="btn btn-primary text-center ">Profile</a>
+								</div>
+							</div>
+						
 					</div>
-					<form id = "edit-form" action = "EditProfileDetail" method = "POST">
-						<table>
-
-							<tr>
-								<td>Id :</td>
-								<td><%=user.getId()%></td>
-							</tr>
-							<tr>
-								<td>Name :</td>
-								<td><input name = "user_name" type="text" placeholder="Enter your name."></td>
-							</tr>
-							<tr>
-								<td>Email :</td>
-								<td><input name = "user_email" type="email" placeholder="Enter your email"></td>
-							</tr>
-							<tr>
-								<td>Password :</td>
-								<td><input name = "user_password" type="password"
-									placeholder="Enter your password."></td>
-							</tr>
-							<tr>
-								<td>Gender :</td>
-								<td><input name = "user_gender" type="text" placeholder="Enter your Gender."></td>
-							</tr>
-						</table>
-
-
-						<button type="submit" class="btn btn-primary">Update</button>
-					</form>
-
-				</div>
-
-				<div class="card-body">
-					<a href="profile.jsp" class="btn btn-primary ">Profile</a>
+					
+<!-- Edit section of the profile is END here -->
+<button id="editButton"
+							class="btn btn-primary card-link d-flex justify-content-center">Edit</button>
 				</div>
 			</div>
-
 		</div>
-
-		<button id="editButton"
-			class="btn btn-primary card-link d-flex justify-content-center">Edit</button>
 	</div>
 
 
 
-
-
-
-      <!-- S C R I P T -->
+	<!-- S C R I P T -->
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -126,7 +146,8 @@ if (user == null) {
 		crossorigin="anonymous"></script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 
